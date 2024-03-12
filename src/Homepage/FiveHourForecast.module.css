@@ -9,9 +9,11 @@
 }
 
 .flex_item_icon{
-    padding-right: 20px;
+    padding-right: 6%;
     text-align: center;
     width:15%;
+    height: 15%;
+    font-size: 2.2vw;
   
 }
 
@@ -28,43 +30,133 @@
     align-items: center;
     justify-content: center;
     border-bottom: 5px solid black;
+    
 }
 
 .flex_item_rain{
     display: flex;
     flex-direction: row;
-    padding-left:15%;
+    padding-left: 14%;
     text-align: center;
+    font-size: 2.2vw;
+    margin-top: -17px;
+    padding-bottom: 2%;
 }
 /* time */
 .flex_Container_time{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+
+
 }
 .flex_item_time{
-    padding-right: 10%;
+    width: 20%;
+
     text-align: center;
+    font-size: 2.2vw;
    
 }
 
-
 /* current  */
 .flex_current{
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 463px;
+    height: 30%;
     flex-shrink: 0;
     border-radius: 30px 30px 0px 0px;
     background: linear-gradient(180deg, #D9D9D9 0%, rgba(217, 217, 217, 0.94) 0.01%, rgba(217, 217, 217, 0.00) 100%);
 }
-.flex_current_item1{
-    width: 50%;
-    text-align: center;
-    justify-content: center;
+.flex_current>div{
+    width:50%;
 }
+
+.current_icon{
+    margin-top: 30px;
+    width: 60%;
+    width: 60%;
+}
+
+
+
+.current_container_right{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    flex: 1 0 auto; 
+    
+}
+
+
+.current_loc_date_container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+
+.current_location{
+    width:50%;
+    text-align: left;
+    font-size: 2.2vw;
+    margin-top: 5px;
+}
+.current_date{
+    width: 50%;
+    text-align: right;
+    padding-right: 10%;
+    font-size: 2.2vw;
+    margin-top: 5px;
+}
+.current_desc{
+    text-align: right;
+    padding-right: 10%;
+    font-size: 3.2vw;
+    margin-top: 5px;
+}
+.current_temp{
+    text-align: right;
+    padding-right: 10%;
+    font-size: 3.2vw;
+    margin-top: 5px;
+}
+
+.rain_time_container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 5px;
+}
+.current_time{
+    text-align: right;
+    padding-right: 10%;
+    font-size: 3.2vw;
+    margin-top: 5px;
+}
+
+.current_rain{
+    display: flex;
+    flex-direction: row;
+    padding-left: 15%;
+    text-align: center;
+    font-size: 3.2vw;
+    margin-top: 5px;
+}
+
+
+
+p{
+    margin: 0px;
+}
+
 
 
 
@@ -75,3 +167,46 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+
+
+/* 5 dday forecast */
+.FiveDayForecast{
+    width: 100%;
+    flex-shrink: 0;
+    font-size: 3.2vw;
+    border-radius: 30px;
+    background: linear-gradient(180deg, #D9D9D9 0%, rgba(217, 217, 217, 0.94) 0.01%, rgba(217, 217, 217, 0.00) 100%);
+}
+.FiveDayForecast>h1{
+    text-align: center;
+    justify-content: center;
+}
+
+.fiveDay_Container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.fiveDay_icon{
+    width:20%;
+}
+.f_icon_day{
+    width:20%;
+}
+.fiveDay_date{
+    width:30%;
+}
+.fiveDay_rainchance{
+    display: flex;
+    flex-direction: row;
+    width:15%;
+    justify-content: center;
+}
+.five_rain_icon{
+    width:15%;
+}
+.fiveDay_temp{
+    width:30%
+}
+

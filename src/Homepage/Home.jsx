@@ -15,6 +15,8 @@ function Home(){
     const [CurrentLocation,setCurrentLocation]=useState();
     const [CurrentWeather,setCurrentWeather]=useState();
     const [Current5hours,setCurrent5hours]=useState();
+
+    const [Current5Day,setCurrent5Day]=useState();
    
     
 
@@ -30,7 +32,7 @@ function Home(){
                     let latitude= position.coords.latitude;
                     let longitude= position.coords.longitude;
                     setCurrentLocation({ latitude, longitude });
-            
+                  
                   },
                   (error) => {
                     console.log(error.message);
@@ -54,9 +56,25 @@ function Home(){
             `https://api.openweathermap.org/data/2.5/weather?lat=${CurrentLocation.latitude}&lon=${CurrentLocation.longitude}&appid=69a76ba65a0f35730c3d61f7b31cfc05`
         );
         setCurrentWeather(response.data);
+        
+    
+         //You can see all the weather data in console log
+    }
+
+    
+    async function handle5dayWeather(){
+
+        //get current weather data
+        const response=await axios.get(
+            `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${CurrentLocation.latitude}&lon=${CurrentLocation.longitude}&cnt=5&appid=69a76ba65a0f35730c3d61f7b31cfc05`
+        );
+        setCurrent5Day(response.data);
         console.log(response.data);
          //You can see all the weather data in console log
     }
+
+
+
 
     async function handleCurrent5hours(){
         //get current weather data
@@ -64,6 +82,7 @@ function Home(){
             `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${CurrentLocation.latitude}&lon=${CurrentLocation.longitude}&appid=69a76ba65a0f35730c3d61f7b31cfc05`
         );
         setCurrent5hours(response.data);
+      
         
        //You can see all the weather data in console log
 
@@ -75,19 +94,26 @@ function Home(){
     },[])
 
     useEffect(() => {
-  
+        if(CurrentLocation){
             handleCurrentWeather();
             handleCurrent5hours();
+            handle5dayWeather();
+        }
+        else{
+            handleCurrentLocation();
+        }
+  
+        
              
     },[CurrentLocation])
 
 
-    if(CurrentLocation&& CurrentWeather && Current5hours){
+    if(CurrentLocation&& CurrentWeather && Current5hours && Current5Day){
         return(
         <div>
             <h1>Display activity</h1>
            
-           <FiveHourForecast weather={Current5hours} current={CurrentWeather}/>
+           <FiveHourForecast weather={Current5hours} current={CurrentWeather} DayForecast={Current5Day}/>
         </div>   
     )    
         }
