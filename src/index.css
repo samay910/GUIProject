@@ -3,7 +3,7 @@
 } */
 
 :root {
-    --section-overlay: rgba(164, 170, 187, 0.7);
+    --section-overlay: rgba(95, 107, 139, 0.7);
     --background-overlay: rgba(0,0,0,0.2);
 }
 
@@ -17,11 +17,19 @@
 }
 
 .app {
-    width: 100%;
-    min-height: 150vh;
+    width: fit-content;
+    position: center;
+    border-radius: 20px;
+    justify-content: center;
+    
     background-position: center;
     background-size: cover;
+    /* margin-left: 30rem; */
     
+}
+
+.outside-app {
+    justify-content: center;
 }
 
 .overlay {
@@ -47,24 +55,32 @@
     width: 100%;
     padding: 1rem;
     border-radius: 0.4rem;
-    color: black;
+    color: white;
 }
 
 .section__inputs, .section__temperature {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: var(--section-overlay);
+    margin-top: 5rem;
 }
 
 .section__inputs>input {
     border: 0.8px solid white;
     border-radius: 0.4rem;
     background-color: transparent;
-    color: black;
+    color: white;
     padding: 0.5rem;
     font-size: 20px;
     font-weight: 200;
+    width: 500px;
+    
+}
+
+::placeholder{
+    color: white;
 }
 
 .section__inputs>input:focus {
@@ -90,6 +106,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 .icon>h3 {
@@ -99,82 +116,140 @@
 }
 
 
+.section__descriptions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* color: aqua; */
+    background-color: var(--section-overlay);
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+}
 
 
 .temperature>h1 {
     font-size: 60px;
 }
 
+.description__card-icon{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 12px;
+    size: 10rem;
+    font-size: 2rem;
+}
+
+.description__card-icon>small{
+    text-transform: capitalize;
+    /* font-size: 5rem; */
+}
+
+.activity-title {
+    color: white;
+    background-color: var(--section-overlay);
+    padding: 1rem;
+    border-radius: 0.4rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 /* For screens smaller than 768px (tablets and below) */
 @media (max-width: 767px) {
     .app {
-        height: auto; /* Adjust height to fit content */
-        min-height: 200vh;
+        width: 55rem;
+        height: auto;
+        min-height: 225vh;
+        position: center;
+        margin-left: -2rem;
     }
     .overlay {
-        height: 100vh; /* Keep overlay full height */
+        height: 100vh; 
     }
     .container {
-        padding: 0.5rem; /* Adjust padding */
+        padding: 0.5rem;
     }
     .section__inputs>input {
-        font-size: 16px; /* Decrease font size for smaller screens */
+        font-size: 16px; 
     }
     .section__inputs>button {
-        padding: 8px 40px; /* Adjust button padding */
-        font-size: 18px; /* Decrease font size for smaller screens */
+        padding: 8px 40px; 
+        font-size: 18px; 
     }
     .icon>h3 {
-        font-size: 12px; /* Decrease font size for smaller screens */
+        font-size: 12px; 
     }
     .temperature>h1 {
-        font-size: 40px; /* Decrease font size for smaller screens */
+        font-size: 40px; 
     }
 }
 
 /* For screens between 768px and 1023px (tablets) */
 @media (min-width: 768px) and (max-width: 1023px) {
+    .app {
+        width: 50rem;
+        height: auto; 
+        min-height: 150vh;
+        position: center;
+        /* margin-left: -2rem; */
+    }
     .container {
-        padding: 0.8rem; /* Adjust padding */
+        padding: 0.8rem;
     }
     .section__inputs>input {
-        font-size: 18px; /* Adjust font size */
+        font-size: 18px; 
     }
     .section__inputs>button {
-        padding: 10px 45px; /* Adjust button padding */
-        font-size: 18px; /* Adjust font size */
+        padding: 10px 45px; 
+        font-size: 18px; 
     }
     .icon>h3 {
-        font-size: 14px; /* Adjust font size */
+        font-size: 14px; 
     }
     .temperature>h1 {
-        font-size: 50px; /* Adjust font size */
+        font-size: 50px;
     }
 }
 
 /* For screens 1024px and above (desktops) */
 @media (min-width: 1024px) {
     .app {
-        height: 100vh; /* Keep full height */
-        min-height: 150vh;
+        height: 100vh;
+        min-height: 250vh;
+        justify-content: center;
+        margin-left: 20rem;
+        width: 50rem;
     }
     .overlay {
-        height: 100%; /* Keep overlay full height */
+        height: 100%;
     }
     .container {
-        padding: 1rem; /* Keep default padding */
+        padding: 1rem; 
     }
     .section__inputs>input {
-        font-size: 20px; /* Keep default font size */
+        font-size: 20px; 
     }
     .section__inputs>button {
-        padding: 10px 50px; /* Keep default button padding */
-        font-size: 20px; /* Keep default font size */
+        padding: 10px 50px; 
+        font-size: 20px; 
     }
     .icon>h3 {
-        font-size: 15px; /* Keep default font size */
+        font-size: 15px; 
     }
     .temperature>h1 {
-        font-size: 60px; /* Keep default font size */
+        font-size: 60px;
     }
 }

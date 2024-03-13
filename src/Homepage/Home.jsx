@@ -94,7 +94,7 @@ function Home() {
     return (
       <div>
         <button onClick={handleButtonClick}>View World Weather</button>
-        {showWeather && <WeatherDisplay />}
+        {showWeather && <WeatherDisplay location="london" />}
 
         {/* <h1>Display activity</h1> */}
 
