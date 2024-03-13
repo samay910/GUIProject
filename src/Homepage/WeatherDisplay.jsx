@@ -4,7 +4,6 @@ import sunny from "../assets/sunny.jpeg";
 import cold from "../assets/cold.jpeg";
 import Descriptions from "../Homepage/Descriptions.jsx";
 import { getFormattedWeatherData } from "../weatherService.js";
-import { FcReading, FcReadingEbook } from "react-icons/fc";
 import { FaLaptop } from "react-icons/fa";
 import { TfiWrite } from "react-icons/tfi";
 import { PiBooksLight } from "react-icons/pi";
