@@ -1,3 +1,180 @@
 /* body{
     background-image: url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg');
 } */
+
+:root {
+    --section-overlay: rgba(164, 170, 187, 0.7);
+    --background-overlay: rgba(0,0,0,0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-size: cover;
+    
+}
+
+.app {
+    width: 100%;
+    min-height: 150vh;
+    background-position: center;
+    background-size: cover;
+    
+}
+
+.overlay {
+    width: 100%;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+/* Top */
+
+.section {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    color: black;
+}
+
+.section__inputs, .section__temperature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--section-overlay);
+}
+
+.section__inputs>input {
+    border: 0.8px solid white;
+    border-radius: 0.4rem;
+    background-color: transparent;
+    color: black;
+    padding: 0.5rem;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.section__inputs>input:focus {
+    outline: none;
+}
+
+.section__inputs>button {
+    padding: 10px 50px;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+}
+
+.section__inputs>button:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon>h3 {
+    font-size: 15px;
+    font-weight: 200;
+    text-transform: capitalize;
+}
+
+
+
+
+.temperature>h1 {
+    font-size: 60px;
+}
+
+/* For screens smaller than 768px (tablets and below) */
+@media (max-width: 767px) {
+    .app {
+        height: auto; /* Adjust height to fit content */
+        min-height: 200vh;
+    }
+    .overlay {
+        height: 100vh; /* Keep overlay full height */
+    }
+    .container {
+        padding: 0.5rem; /* Adjust padding */
+    }
+    .section__inputs>input {
+        font-size: 16px; /* Decrease font size for smaller screens */
+    }
+    .section__inputs>button {
+        padding: 8px 40px; /* Adjust button padding */
+        font-size: 18px; /* Decrease font size for smaller screens */
+    }
+    .icon>h3 {
+        font-size: 12px; /* Decrease font size for smaller screens */
+    }
+    .temperature>h1 {
+        font-size: 40px; /* Decrease font size for smaller screens */
+    }
+}
+
+/* For screens between 768px and 1023px (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        padding: 0.8rem; /* Adjust padding */
+    }
+    .section__inputs>input {
+        font-size: 18px; /* Adjust font size */
+    }
+    .section__inputs>button {
+        padding: 10px 45px; /* Adjust button padding */
+        font-size: 18px; /* Adjust font size */
+    }
+    .icon>h3 {
+        font-size: 14px; /* Adjust font size */
+    }
+    .temperature>h1 {
+        font-size: 50px; /* Adjust font size */
+    }
+}
+
+/* For screens 1024px and above (desktops) */
+@media (min-width: 1024px) {
+    .app {
+        height: 100vh; /* Keep full height */
+        min-height: 150vh;
+    }
+    .overlay {
+        height: 100%; /* Keep overlay full height */
+    }
+    .container {
+        padding: 1rem; /* Keep default padding */
+    }
+    .section__inputs>input {
+        font-size: 20px; /* Keep default font size */
+    }
+    .section__inputs>button {
+        padding: 10px 50px; /* Keep default button padding */
+        font-size: 20px; /* Keep default font size */
+    }
+    .icon>h3 {
+        font-size: 15px; /* Keep default font size */
+    }
+    .temperature>h1 {
+        font-size: 60px; /* Keep default font size */
+    }
+}
