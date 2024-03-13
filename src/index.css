@@ -172,7 +172,7 @@
     .app {
         width: 55rem;
         height: auto;
-        min-height: 225vh;
+        min-height: 300vh;
         position: center;
         margin-left: -2rem;
     }
@@ -202,9 +202,9 @@
     .app {
         width: 50rem;
         height: auto; 
-        min-height: 150vh;
+        min-height: 300vh;
         position: center;
-        /* margin-left: -2rem; */
+        margin-left: -2rem;
     }
     .container {
         padding: 0.8rem;
@@ -228,9 +228,9 @@
 @media (min-width: 1024px) {
     .app {
         height: 100vh;
-        min-height: 250vh;
+        min-height: 300vh;
         justify-content: center;
-        margin-left: 20rem;
+        margin-left: 5rem;
         width: 50rem;
     }
     .overlay {
@@ -251,5 +251,11 @@
     }
     .temperature>h1 {
         font-size: 60px;
+    }
+}
+
+@media (min-width: 1440px){
+    .app {
+        margin-left: 20rem;
     }
 }
