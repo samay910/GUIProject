@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
+
+
 import React,{useEffect,useState} from "react";
 import styles from "./FiveHourForecast.module.css";
 import rainmid from '../assets/midrain.svg';
@@ -74,7 +76,7 @@ function FiveHourForecast(props){
 
         console.log(DayForecast);
 
-        if (r_time<15){
+        if (r_time<17){
             // set the current weather icon
             if(current_Weather.weather[0].main=='Clouds'){
                 current_icon=daycloudy;
@@ -311,7 +313,7 @@ function FiveHourForecast(props){
                 <div className={styles.rain_time_container}>
                     <div className={styles.current_rain}>
                         <img src={Raindrop} className={styles.drop_icon} alt="rain" />
-                        <p>{CurrentForecast.Current_cloudyness}</p>
+                        <p>{rainchance[0]}</p>
                     </div>
                     
                     <p className={styles.current_time}>{CurrentForecast.Current_time}</p>

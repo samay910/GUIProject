@@ -10,9 +10,9 @@ import FiveHourForecast from './FiveHourForecast.jsx'
 // set background based on current time.
 
 
-function Home(){
+function Home(props){
 
-    const [CurrentLocation,setCurrentLocation]=useState();
+    const [CurrentLocation,setCurrentLocation]=useState(props.coords);
     const [CurrentWeather,setCurrentWeather]=useState();
     const [Current5hours,setCurrent5hours]=useState();
 
@@ -23,16 +23,19 @@ function Home(){
     
     // get the default browser location
     function handleCurrentLocation(){
-        try {
+        if(CurrentLocation==''){
+                  try {
          
             //get browser data
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                   (position) => {
+
                     let latitude= position.coords.latitude;
                     let longitude= position.coords.longitude;
+               
                     setCurrentLocation({ latitude, longitude });
-                  
+                    
                   },
                   (error) => {
                     console.log(error.message);
@@ -44,8 +47,10 @@ function Home(){
             }
 
         } 
-        catch (error) {
-            console.error(error);
+            catch (error) {
+                
+                console.error(error);
+            }
         }
     }
 
@@ -94,7 +99,7 @@ function Home(){
     },[])
 
     useEffect(() => {
-        if(CurrentLocation){
+        if(CurrentLocation!=''){
             handleCurrentWeather();
             handleCurrent5hours();
             handle5dayWeather();
@@ -111,7 +116,7 @@ function Home(){
     if(CurrentLocation&& CurrentWeather && Current5hours && Current5Day){
         return(
         <div>
-            <h1>Display activity</h1>
+        
            
            <FiveHourForecast weather={Current5hours} current={CurrentWeather} DayForecast={Current5Day}/>
         </div>   
