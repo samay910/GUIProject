@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-
-
 import React,{useEffect,useState} from "react";
 import styles from "./FiveHourForecast.module.css";
 import rainmid from '../assets/midrain.svg';
@@ -23,18 +21,19 @@ import Raindrop from '../assets/drop.svg';
 
 function FiveHourForecast(props){
 
+    // all props entered are the data retrieved by the api calls on the home page
     const weather = props.weather.list;
     const current_Weather=props.current;
     const DayForecast=props.DayForecast.list;
 
-   
-
+    // sets the data of the 5 hour forecast in 3 sets of state arrays
     const [icon,seticon]=useState([rainmid,rainmid,rainmid,rainmid,rainmid]);
 
     const [rainchance,setrainchance]=useState(['1%','2%','3%','4%','5%']);
 
     const [time,settime]=useState(['10:00','11:00','12:00','13:00','14:00'])
 
+    // 5 day forecast is empty to be set later
     const [FiveDayForecast,setFiveDayForecast]=useState([])
 
     // needs to be an object containing icon location date of week current temp current time rain chance
@@ -47,19 +46,17 @@ function FiveHourForecast(props){
         Current_loc:'',
         Current_cloudyness:''});
 
-        
-
-
+    // where state values are set
     function setData(){
-        // loop through each hour to set all values
-        // first check time to go through correct set of assests
 
+        // real time
         let r_time=weather[0].dt_txt.slice(11,13);
         r_time=parseInt(r_time);
         // day weather
         let current_icon=dayverycloudy;
         const date = new Date(current_Weather.dt * 1000);
         let day=date.getDay();
+        // the day is determined by the number recieved by the api
         if (day==1){day='Monday';}
         else if (day==2){day='Tuesday';}
         else if (day==3){day='Wednesday';}
@@ -67,15 +64,17 @@ function FiveHourForecast(props){
         else if (day==5){day='Friday';}
         else if (day==6){day='Saturday';}
         else{day='Sunday';}
+        // format the time to display current time
         const hours = date.getHours().toString().padStart(2, '0');
         const minutes = date.getMinutes().toString().padStart(2, '0');
         const correct_time=hours+':'+minutes;
+
+        // list of empty arrays to be set later
         let w_icon =[]
         let w_time=[]
         let w_rainchance=[]
 
-        console.log(DayForecast);
-
+        // how the icon dispayed on each forecast is determined,less than17 = day
         if (r_time<17){
             // set the current weather icon
             if(current_Weather.weather[0].main=='Clouds'){
@@ -97,7 +96,7 @@ function FiveHourForecast(props){
                 current_icon=storm;
             }
 
-
+            //set the data for 5 hour forecast 
             for (let i = 0; i < 5; i++) {
                 //add the time
                 w_time.push(weather[i].dt_txt.slice(11,16));
@@ -126,6 +125,7 @@ function FiveHourForecast(props){
                 }
             }
         }
+        // deal with night icons
         else{
 
             // set the current weather icon
@@ -148,7 +148,7 @@ function FiveHourForecast(props){
                 current_icon=storm;
             }
 
-
+            // set night icons
             for (let i = 0; i < 5; i++) {
                 //add the time
                 w_time.push(weather[i].dt_txt.slice(11,16));
@@ -177,14 +177,12 @@ function FiveHourForecast(props){
                 }
             }
         }
+
         seticon(w_icon);
         setrainchance(w_rainchance);
         settime(w_time);
-        // deal with current weather icon
-
-
-
-        //current forecast 
+        
+        //set current forecast state
         setCurrentForecast({
             ...CurrentForecast,
             Current_icon:current_icon,
@@ -197,7 +195,7 @@ function FiveHourForecast(props){
             Current_cloudyness:current_Weather.clouds.all+ '%'
         });
 
-        // set 5 days
+        // set 5 days forecast
         for(let i=0 ; i<5 ; i++){
 
             let five_icon=daycloudy;
@@ -217,7 +215,7 @@ function FiveHourForecast(props){
                 five_icon=storm;
             }
 
-
+            // deal with the day similar to above
             const F_date = new Date(DayForecast[i].dt * 1000);
             let F_day=F_date.getDay();
             let day='';
@@ -229,12 +227,11 @@ function FiveHourForecast(props){
             else if (F_day==6){day='Saturday';}
             else{day='Sunday';}
 
+            // set min and max temp for the 5 day forcast
             let min=(DayForecast[i].temp.min-273.15).toFixed(1)+'°C';
             let max=(DayForecast[i].temp.max-273.15).toFixed(1)+'°C';
 
-
-
-
+            // add the oject to the 5 day forecats array state
             setFiveDayForecast(d=>[...d,{
                 F_time:day,
                 F_icon:five_icon,
@@ -242,12 +239,9 @@ function FiveHourForecast(props){
                 F_temprange:max+'/'+min
             }])
         }
-
-
-
-
     }
 
+    // reset the fivedayforecast state and run the set data function
     useEffect(()=>{
         setFiveDayForecast([]);
         setData();
@@ -255,99 +249,91 @@ function FiveHourForecast(props){
 
     return(
         <> 
-        {/* icons */}
-        <div className={styles.flex_Container_icon}>
-            {
-                icon.map((image,key)=>
-                <img className={styles.flex_item_icon} key={key} src={image} alt="icon"/>
-                //<p className={styles.flex_item_icon} key={key}>{image}</p>
-                )
-            }
-        </div>
-        {/* rain */}
-        <div className={styles.flex_Container_rain}>
-            {
-                
-                rainchance.map((image,key)=>
-                // <img key={key} src={image} alt="icon" />)
-                <div key={key} className={styles.flex_item_rain}>
-                    <img src={Raindrop} className={styles.drop_icon} alt="rain" />
-                    <p>{image}</p>
-                </div>
-                )
-            }
-        </div>
-
-        <div className={styles.flex_Container_time}>
-            {
-                time.map((image,key)=>
-                // <img key={key} src={image} alt="icon" />)
-                <p className={styles.flex_item_time} key={key}>{image}</p>
-                )
-            }
-        </div> 
-
-        {/* Current Weather */}
-        <div className={styles.flex_current}>
-            <div>
-                     {
-              <img className={styles.current_icon} src={CurrentForecast.Current_icon} alt="icon"/>
-            }
+            {/* icons */}
+            <div className={styles.flex_Container_icon}>
+                {
+                    icon.map((image,key)=>
+                    <img className={styles.flex_item_icon} key={key} src={image} alt="icon"/>
+                    //<p className={styles.flex_item_icon} key={key}>{image}</p>
+                    )
+                }
+            </div>
+            {/* rain */}
+            <div className={styles.flex_Container_rain}>
+                {
+                    
+                    rainchance.map((image,key)=>
+                    // <img key={key} src={image} alt="icon" />)
+                    <div key={key} className={styles.flex_item_rain}>
+                        <img src={Raindrop} className={styles.drop_icon} alt="rain" />
+                        <p>{image}</p>
+                    </div>
+                    )
+                }
             </div>
 
-       
-            <div className={styles.current_container_right}>
-                <div className={styles.current_loc_date_container}>
-                    <p className={styles.current_location}>{CurrentForecast.Current_loc}</p>
-                    <p className={styles.current_date}>{CurrentForecast.Current_dayofweek}</p>
-                </div>
-                <div >
-                    <p className={styles.current_desc}>{CurrentForecast.Current_description}</p>
-                </div>
+            <div className={styles.flex_Container_time}>
+                {
+                    time.map((image,key)=>
+                    // <img key={key} src={image} alt="icon" />)
+                    <p className={styles.flex_item_time} key={key}>{image}</p>
+                    )
+                }
+            </div> 
+
+            {/* Current Weather */}
+            <div className={styles.flex_current}>
                 <div>
-                    <p className={styles.current_temp}>{CurrentForecast.Current_temp}</p>
+                        {
+                <img className={styles.current_icon} src={CurrentForecast.Current_icon} alt="icon"/>
+                }
                 </div>
-                
-                
-                {/* contains the time and current rain chance */}
-                <div className={styles.rain_time_container}>
-                    <div className={styles.current_rain}>
-                        <img src={Raindrop} className={styles.drop_icon} alt="rain" />
-                        <p>{rainchance[0]}</p>
+
+                <div className={styles.current_container_right}>
+                    <div className={styles.current_loc_date_container}>
+                        <p className={styles.current_location}>{CurrentForecast.Current_loc}</p>
+                        <p className={styles.current_date}>{CurrentForecast.Current_dayofweek}</p>
+                    </div>
+                    <div >
+                        <p className={styles.current_desc}>{CurrentForecast.Current_description}</p>
+                    </div>
+                    <div>
+                        <p className={styles.current_temp}>{CurrentForecast.Current_temp}</p>
                     </div>
                     
-                    <p className={styles.current_time}>{CurrentForecast.Current_time}</p>
+                    {/* contains the time and current rain chance */}
+                    <div className={styles.rain_time_container}>
+                        <div className={styles.current_rain}>
+                            <img src={Raindrop} className={styles.drop_icon} alt="rain" />
+                            <p>{rainchance[0]}</p>
+                        </div>
+                        
+                        <p className={styles.current_time}>{CurrentForecast.Current_time}</p>
+                    </div>
+                    
                 </div>
                 
-            </div>
+            </div>              
             
-        </div>              
-        
-        {/* 5 day forecast */}
-        <div className={styles.FiveDayForecast}>
-            <h1>Forecast</h1>
+            {/* 5 day forecast */}
+            <div className={styles.FiveDayForecast}>
+                <h1>Forecast</h1>
+                {
+                    FiveDayForecast.map((current,key) => 
+                    <div className={styles.fiveDay_Container} key={key}>
+                        <p className={styles.fiveDay_date}>{current.F_time}</p>
+                        <img src={current.F_icon} alt="" className={styles.f_icon_day}/>
 
-            {
-                FiveDayForecast.map((current,key) => 
+                        <div className={styles.fiveDay_rainchance}>
+                            <img src={Raindrop} className={styles.five_rain_icon} alt="rain" />
+                            <p>{current.F_rain}</p>
+                        </div>
 
-
-                <div className={styles.fiveDay_Container} key={key}>
-                    <p className={styles.fiveDay_date}>{current.F_time}</p>
-                    <img src={current.F_icon} alt="" className={styles.f_icon_day}/>
-
-                    <div className={styles.fiveDay_rainchance}>
-                        <img src={Raindrop} className={styles.five_rain_icon} alt="rain" />
-                        <p>{current.F_rain}</p>
+                        <p className={styles.fiveDay_temp}>{current.F_temprange}</p>
                     </div>
-
-                    <p className={styles.fiveDay_temp}>{current.F_temprange}</p>
-                </div>
-
-
-                )
-            }
-
-        </div>
+                    )
+                }
+            </div>
 
         </>
     )

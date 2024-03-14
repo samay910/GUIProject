@@ -1,3 +1,250 @@
-/* body{
-    background-image: url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg');
-} */
+.app {
+    width: fit-content;
+    position: center;
+    border-radius: 20px;
+    justify-content: center;
+    
+    background-position: center;
+    background-size: cover;
+    /* margin-left: 30rem; */
+    
+}
+
+.outside-app {
+    justify-content: center;
+    display: flex;
+}
+
+.overlay {
+    width: 100%;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+/* Top */
+
+.section {
+
+    padding: 1rem;
+    border-radius: 0.4rem;
+    color: rgba(50, 48, 48, 0.872);
+}
+
+.section__inputs{
+    color: rgba(50, 48, 48, 0.872);
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--section-overlay);
+   
+}
+
+
+.section__temperature {
+    color: rgba(50, 48, 48, 0.872);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--section-overlay);
+    border: 2px solid black;
+    width: 60%;
+  
+}
+
+.section__inputs>input {
+    border: 0.8px solid white;
+    border-radius: 0.4rem;
+    background-color: transparent;
+    color: rgba(50, 48, 48, 0.872);
+    padding: 0.5rem;
+    font-size: 20px;
+    font-weight: 200;
+    width: 500px;
+    
+}
+
+::placeholder{
+    color: rgba(50, 48, 48, 0.872);
+}
+
+.section__inputs>input:focus {
+    outline: none;
+}
+
+.section__inputs>button {
+    padding: 10px 50px;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: white;
+}
+
+.section__inputs>button:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.icon>h3 {
+    font-size: 15px;
+    font-weight: 200;
+    text-transform: capitalize;
+}
+
+
+.section__descriptions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* color: aqua; */
+    background-color: var(--section-overlay);
+  
+    padding: 1rem;
+    border-radius: 0.4rem;
+}
+
+
+.temperature>h1 {
+    font-size: 60px;
+}
+
+.description__card-icon{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 12px;
+    size: 10rem;
+    font-size: 2rem;
+}
+
+.description__card-icon>small{
+    text-transform: capitalize;
+    /* font-size: 5rem; */
+}
+
+.activity-title {
+    color: rgba(50, 48, 48, 0.872);
+    background-color: var(--section-overlay);
+    padding: 1rem;
+    border-radius: 0.4rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* For screens smaller than 768px (tablets and below) */
+@media (max-width: 767px) {
+    .app {
+        width: 55rem;
+        height: auto;
+        min-height: 300vh;
+        position: center;
+        margin-left: -2rem;
+    }
+    .overlay {
+        height: 100vh; 
+    }
+    .container {
+        padding: 0.5rem;
+    }
+    .section__inputs>input {
+        font-size: 16px; 
+    }
+    .section__inputs>button {
+        padding: 8px 40px; 
+        font-size: 18px; 
+    }
+    .icon>h3 {
+        font-size: 12px; 
+    }
+    .temperature>h1 {
+        font-size: 40px; 
+    }
+}
+
+/* For screens between 768px and 1023px (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .app {
+        width: 50rem;
+        height: auto; 
+        min-height: 300vh;
+        position: center;
+        margin-left: -2rem;
+    }
+    .container {
+        padding: 0.8rem;
+    }
+    .section__inputs>input {
+        font-size: 18px; 
+    }
+    .section__inputs>button {
+        padding: 10px 45px; 
+        font-size: 18px; 
+    }
+    .icon>h3 {
+        font-size: 14px; 
+    }
+    .temperature>h1 {
+        font-size: 50px;
+    }
+}
+
+/* For screens 1024px and above (desktops) */
+@media (min-width: 1024px) {
+    .app {
+        height: fit-content;
+        min-height: 300vh;
+        justify-content: center;
+        margin-left: 5rem;
+        width: 50rem;
+    }
+    .overlay {
+        height: 100%;
+    }
+    .container {
+        padding: 1rem; 
+    }
+    .section__inputs>input {
+        font-size: 20px; 
+    }
+    .section__inputs>button {
+        padding: 10px 50px; 
+        font-size: 20px; 
+    }
+    .icon>h3 {
+        font-size: 15px; 
+    }
+    .temperature>h1 {
+        font-size: 60px;
+    }
+}
+
