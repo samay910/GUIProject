@@ -1,0 +1,106 @@
+.option_button_container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+    text-align: center;
+    padding-bottom: 10%;
+    justify-content: space-between;
+    
+    
+}
+.option_button_container>h2{
+    width: 80%;
+  font-size: 2.9vw;
+    
+    
+}
+
+.OptionsButton{
+    width: 10%;
+    text-align: end;
+}
+.OptionsButton:hover{
+  width:11%;
+  text-align: end;
+}
+.OptionsButton>img{
+    width: 95%;
+    height: 95%;
+}
+
+.options_container{
+    width:100%;
+    
+    height: 30%;
+    flex-shrink: 0;
+    border-radius: 30px 30px 0px 0px;
+    background: linear-gradient(180deg, #D9D9D9 0%, rgba(217, 217, 217, 0.94) 0.01%, rgba(217, 217, 217, 0.00) 100%);
+    text-align: center;
+}
+
+.searchbarContainer{
+
+    text-align: center;
+    padding-top: 10%;
+ 
+
+}
+
+
+
+.searchbar {
+    padding: 8px 12px;
+    border-bottom-left-radius: 20px; 
+    border-top-left-radius: 20px; /* Adjust the radius as needed */
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .searchbutton {
+    padding: 8px 20px;
+    border-bottom-right-radius: 20px; 
+    border-top-right-radius: 20px;
+    border: 1px solid #19eb55; /* Change the border color as needed */
+    background-color: #1ddf3d; /* Change the button color as needed */
+    color: #fff; /* Change the text color as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchbutton:hover {
+    background-color: #01b339; /* Change the hover color as needed */
+  }
+
+  .chosenContainer{
+    text-align: center;
+    padding-top: 5%;
+  }
+
+
+.chosen_button{
+    width: 50%;
+    border-radius: 20px;
+    border: 1px solid #19eb55; /* Change the border color as needed */
+    background-color: #1ddf3d; /* Change the button color as needed */
+    color: #fff; /* Change the text color as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.chosen_button:hover {
+    background-color: #01b339; /* Change the hover color as needed */
+  }
+
+
+.more_info{
+    width: 30%;
+    border-radius: 20px;
+    border: 1px solid hsl(137, 57%, 68%); /* Change the border color as needed */
+    background-color: #16351b; /* Change the button color as needed */
+    color: #fff; /* Change the text color as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.more_info:hover {
+    background-color: #01b339; /* Change the hover color as needed */
+  }
