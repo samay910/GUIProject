@@ -1,4 +1,5 @@
 .app {
+    width: -moz-fit-content;
     width: fit-content;
     position: center;
     border-radius: 20px;

@@ -11,7 +11,7 @@ function Options(){
 
     // states are used to manage which page the user is on ad which is displayed
     const [showMenue, setshowMenue] = useState(false);
-    const [mainPage, setMainPage] = useState(true);
+    const [mainPage, setmainPage] = useState(true);
     const [moreinfo,setmoreinfo] = useState(false);
 
     // states used to deal with location changes and inputs
@@ -24,7 +24,7 @@ function Options(){
     //display options menue page 
     const handleButtonMenueClick = () => {
         setshowMenue(true);
-        setMainPage(false);
+        setmainPage(false);
         setListOfLocations([''])
     };
 
@@ -38,7 +38,7 @@ function Options(){
     const retuntohoem=() => {
         setmoreinfo(false);
         setshowMenue(false);
-        setMainPage(true);
+        setmainPage(true);
     }
 
     // does the api call for the location and returns the result if valid

@@ -100,7 +100,7 @@ function FiveHourForecast(props){
             for (let i = 0; i < 5; i++) {
                 //add the time
                 w_time.push(weather[i].dt_txt.slice(11,16));
-                w_rainchance.push(weather[i].pop*100 + '%');
+                w_rainchance.push(Math.round(weather[i].pop*100) + '%');
 
                 if (weather[i].weather[0].main== 'Clouds'){
                     w_icon.push(daycloudy);
@@ -152,7 +152,7 @@ function FiveHourForecast(props){
             for (let i = 0; i < 5; i++) {
                 //add the time
                 w_time.push(weather[i].dt_txt.slice(11,16));
-                w_rainchance.push(weather[i].pop*100 + '%');
+                w_rainchance.push(Math.round(weather[i].pop*100) + '%');
 
                 if (weather[i].weather[0].main== 'Clouds'){
                     w_icon.push(nightcloudy);
@@ -235,7 +235,7 @@ function FiveHourForecast(props){
             setFiveDayForecast(d=>[...d,{
                 F_time:day,
                 F_icon:five_icon,
-                F_rain:DayForecast[i].pop*100 + '%',
+                F_rain:Math.round(DayForecast[i].pop*100) + '%',
                 F_temprange:max+'/'+min
             }])
         }
