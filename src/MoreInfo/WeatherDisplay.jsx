@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import "./WeatherDisplay.css";
 import sunny from "../assets/sunny.jpeg";
-import cold from "../assets/snow.webp";
+import cold from "../assets/final-snow.png";
 import Descriptions from "../MoreInfo/Descriptions.jsx";
 import { getFormattedWeatherData } from "../MoreInfo/weatherService.js";
 import { FaLaptop } from "react-icons/fa";
@@ -142,15 +142,15 @@ function WeatherDisplay({ location }) {
               {weather && (
                 <div className="container">
                   <div className="section section__inputs">
-                    <h3>
+                    <h2>
                       Press the button to switch between Fahrenheight and
                       Celcius
-                    </h3>
+                    </h2>
                     <button onClick={(e) => handleUnitsClick(e)}>°F</button>
                   </div>
                   <div className="section section__temperature">
                     <div className="icon">
-                      <h3>Data Source: {`${weather.name}`}</h3>
+                      <h2>Data Source: {`${weather.name}`}</h2>
                       {/* <h3>{locationName}</h3> */}
                       <img src={weather.iconURL} alt="weatherIcon" />
                       <h3>{weather.description}</h3>
