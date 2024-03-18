@@ -25,23 +25,58 @@ function WeatherDisplay({ location }) {
     if (city == "") {
       try {
         //get browser data
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              let latitude = position.coords.latitude;
-              let longitude = position.coords.longitude;
+        console.log("City Name is empty");
+        // if (navigator.geolocation) {
+        //   console.log("City Name is not empty");
+        //   navigator.geolocation.getCurrentPosition(
+        //     (position) => {
+        //       let latitude = position.coords.latitude;
+        //       let longitude = position.coords.longitude;
 
-              setCity({ latitude, longitude });
-              console.log("changed");
-            },
-            (error) => {
-              console.log(error.message);
-            }
-          );
-        } else {
-          // default location is london
-          setCity({ latitude: "51.5072", longitude: "0.1276" });
+        //       setCity({ latitude, longitude });
+        //       console.log("changed");
+        //     },
+        //     (error) => {
+        //       console.log(error.message);
+        //     }
+        //   );
+        if (navigator.geolocation) {
+          console.log("City Name is not empty");
+          navigator.permissions
+            .query({ name: "geolocation" })
+            .then((permissionStatus) => {
+              if (permissionStatus.state === "granted") {
+                navigator.geolocation.getCurrentPosition(
+                  (position) => {
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+
+                    setCity({ latitude, longitude });
+                    console.log("changed");
+                  },
+                  (error) => {
+                    console.log(error.message);
+                  }
+                );
+              } else if (permissionStatus.state === "prompt") {
+                // Permission is not granted yet, but it can be requested
+                console.log("Geolocation permission is not granted yet.");
+                setCity({ latitude: "51.5072", longitude: "0.1276" });
+              } else if (permissionStatus.state === "denied") {
+                // Permission has been denied by the user
+                console.log(
+                  "Geolocation permission has been denied by the user."
+                );
+                setCity({ latitude: "51.5072", longitude: "0.1276" });
+              }
+            });
         }
+
+        //   } else {
+        //     // default location is london
+        //     console.log("Default weather set to London");
+        //     setCity({ latitude: "51.5072", longitude: "0.1276" });
+        //   }
       } catch (error) {
         console.error(error);
       }

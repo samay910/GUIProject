@@ -85,7 +85,7 @@ function Options() {
               {/* display the current location */}
               <h2>
                 Current Location:{" "}
-                {LocationName != "" ? LocationName : "Browser Location"}
+                {LocationName != "" ? LocationName : "Location Found"}
               </h2>
 
               {/* when clicked switch to option screen */}
@@ -111,7 +111,7 @@ function Options() {
               {/* display the current location */}
               <h2>
                 Current Location:{" "}
-                {LocationName != "" ? LocationName : "Browser Location"}
+                {LocationName != "" ? LocationName : "Location Found"}
               </h2>
 
               {/* when clicked returns to homepage */}
