@@ -39,11 +39,11 @@
 
     padding: 1rem;
     border-radius: 0.4rem;
-    color: rgba(50, 48, 48, 0.872);
+    color: black;
 }
 
 .section__inputs{
-    color: rgba(50, 48, 48, 0.872);
+    color:black;
     align-items: center;
     justify-content: space-between;
     background-color: var(--section-overlay);
@@ -52,7 +52,7 @@
 
 
 .section__temperature {
-    color: rgba(50, 48, 48, 0.872);
+    color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,10 +63,10 @@
 }
 
 .section__inputs>input {
-    border: 0.8px solid white;
+    border: 0.8px solid black;
     border-radius: 0.4rem;
     background-color: transparent;
-    color: rgba(50, 48, 48, 0.872);
+    color: black;
     padding: 0.5rem;
     font-size: 20px;
     font-weight: 200;
@@ -154,7 +154,7 @@
 }
 
 .activity-title {
-    color: rgba(50, 48, 48, 0.872);
+    color: black;
     background-color: var(--section-overlay);
     padding: 1rem;
     border-radius: 0.4rem;
@@ -162,14 +162,26 @@
     font-weight: bold;
 }
 
+@media (min-width: 320px) and (max-width: 374px){
+    .app {
+        margin-left: 7rem;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 424px){
+    .app{
+        margin-left: 3rem;
+    }
+}
+
 /* For screens smaller than 768px (tablets and below) */
 @media (max-width: 767px) {
     .app {
         width: 55rem;
         height: auto;
-        min-height: 300vh;
+        min-height: 320vh;
         position: center;
-        margin-left: -2rem;
+        /* margin-left: -2rem; */
     }
     .overlay {
         height: 100vh; 
@@ -192,6 +204,8 @@
     }
 }
 
+
+
 /* For screens between 768px and 1023px (tablets) */
 @media (min-width: 768px) and (max-width: 1023px) {
     .app {
@@ -199,7 +213,7 @@
         height: auto; 
         min-height: 300vh;
         position: center;
-        margin-left: -2rem;
+        /* margin-left: -2rem; */
     }
     .container {
         padding: 0.8rem;
@@ -223,7 +237,7 @@
 @media (min-width: 1024px) {
     .app {
         height: fit-content;
-        min-height: 300vh;
+        /* min-height: 300vh; */
         justify-content: center;
         margin-left: 5rem;
         width: 50rem;

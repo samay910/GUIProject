@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import "./WeatherDisplay.css";
 import sunny from "../assets/sunny.jpeg";
-import cold from "../assets/cold.jpeg";
+import cold from "../assets/snow.webp";
 import Descriptions from "../MoreInfo/Descriptions.jsx";
 import { getFormattedWeatherData } from "../MoreInfo/weatherService.js";
 import { FaLaptop } from "react-icons/fa";
@@ -20,47 +20,36 @@ function WeatherDisplay({ location }) {
   const [bg, setBG] = useState(sunny);
   const [activity, setActivity] = useState(false);
 
+  // get the default browser location
+  function handleCurrentLocation() {
+    if (city == "") {
+      try {
+        //get browser data
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              let latitude = position.coords.latitude;
+              let longitude = position.coords.longitude;
 
-
-      // get the default browser location
-      function handleCurrentLocation(){
-        if(city==''){
-                  try {
-         
-            //get browser data
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                  (position) => {
-
-                    let latitude= position.coords.latitude;
-                    let longitude= position.coords.longitude;
-               
-                    setCity({ latitude, longitude });
-                    
-                  },
-                  (error) => {
-                    console.log(error.message);
-                  })
-                }
-            else{
-                // default location is london
-                setCity({ latitude:'51.5072', longitude:'0.1276' });
+              setCity({ latitude, longitude });
+            },
+            (error) => {
+              console.log(error.message);
             }
-
-        } 
-            catch (error) {
-                
-                console.error(error);
-            }
+          );
+        } else {
+          // default location is london
+          setCity({ latitude: "51.5072", longitude: "0.1276" });
         }
+      } catch (error) {
+        console.error(error);
+      }
     }
+  }
 
-    useEffect(() => {
-      handleCurrentLocation();            
-
-  },[])
-
-
+  useEffect(() => {
+    handleCurrentLocation();
+  }, []);
 
   const activities = [
     {
@@ -137,70 +126,70 @@ function WeatherDisplay({ location }) {
     setUnits(isCelcius ? "metric" : "imperial");
   };
 
-
-
-  if(city!=''){
-      return (
-    <>
-
-      <div className="outside-app">
-        <div className="app" style={{ backgroundImage: `url(${bg})` }}>
-          <div className="overlay">
-            {weather && (
-              <div className="container">
-                <div className="section section__inputs">
-               
-                  <h3>Press the button to switch between Fahrenheight and Celcius</h3>
-                  <button onClick={(e) => handleUnitsClick(e)}>°F</button>
-                </div>
-                <div className="section section__temperature">
-                  <div className="icon">
-                    <h3>{`${weather.name}, ${weather.country}`}</h3>
-                    <img src={weather.iconURL} alt="weatherIcon" />
-                    <h3>{weather.description}</h3>
+  if (city != "") {
+    return (
+      <>
+        <div className="outside-app">
+          <div className="app" style={{ backgroundImage: `url(${bg})` }}>
+            <div className="overlay">
+              {weather && (
+                <div className="container">
+                  <div className="section section__inputs">
+                    <h3>
+                      Press the button to switch between Fahrenheight and
+                      Celcius
+                    </h3>
+                    <button onClick={(e) => handleUnitsClick(e)}>°F</button>
                   </div>
-                  <div className="temperature">
-                    <h1>{`${weather.temp.toFixed()} °${
-                      units === "metric" ? "C" : "F"
-                    }`}</h1>
-                    <h2>{new Date(weather.dt * 1000).toLocaleTimeString()}</h2>
+                  <div className="section section__temperature">
+                    <div className="icon">
+                      <h3>{`${weather.name}, ${weather.country}`}</h3>
+                      <img src={weather.iconURL} alt="weatherIcon" />
+                      <h3>{weather.description}</h3>
+                    </div>
+                    <div className="temperature">
+                      <h1>{`${weather.temp.toFixed()} °${
+                        units === "metric" ? "C" : "F"
+                      }`}</h1>
+                      <h2>
+                        {new Date(weather.dt * 1000).toLocaleTimeString()}
+                      </h2>
+                    </div>
+                  </div>
+                  {/* bottom description */}
+                  <Descriptions weather={weather} units={units} />
+                  <div className="activity-title">ACTIVITIES TO DO</div>
+                  <div className="section section__descriptions">
+                    {activity
+                      ? activities.map(({ id, name, icon }) => (
+                          <div key={id} className="card">
+                            <div className="activity-format">
+                              <small className="description__card-icon">
+                                {icon}
+                              </small>
+                              <small>{name}</small>
+                            </div>
+                          </div>
+                        ))
+                      : indoor_activities.map(({ id, name, icon }) => (
+                          <div key={id} className="card">
+                            <div className="activity-format">
+                              <small className="description__card-icon">
+                                {icon}
+                              </small>
+                              <small>{name}</small>
+                            </div>
+                          </div>
+                        ))}
                   </div>
                 </div>
-                {/* bottom description */}
-                <Descriptions weather={weather} units={units} />
-                <div className="activity-title">ACTIVITIES TO DO</div>
-                <div className="section section__descriptions">
-                  {activity
-                    ? activities.map(({ id, name, icon }) => (
-                        <div key={id} className="card">
-                          <div className="activity-format">
-                            <small className="description__card-icon">
-                              {icon}
-                            </small>
-                            <small>{name}</small>
-                          </div>
-                        </div>
-                      ))
-                    : indoor_activities.map(({ id, name, icon }) => (
-                        <div key={id} className="card">
-                          <div className="activity-format">
-                            <small className="description__card-icon">
-                              {icon}
-                            </small>
-                            <small>{name}</small>
-                          </div>
-                        </div>
-                      ))}
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   }
-
 }
 
 export default WeatherDisplay;
