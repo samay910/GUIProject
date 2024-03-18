@@ -103,7 +103,7 @@ function WeatherDisplay({ location }) {
 
       setWeather(data);
 
-      // dynamic background
+      // dynamic background for units
       const threshold = units === "metric" ? 20 : 60;
       if (data.temp <= threshold) {
         setActivity(false);
