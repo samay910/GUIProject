@@ -32,6 +32,7 @@ function WeatherDisplay({ location }) {
               let longitude = position.coords.longitude;
 
               setCity({ latitude, longitude });
+              console.log("changed");
             },
             (error) => {
               console.log(error.message);
@@ -99,18 +100,22 @@ function WeatherDisplay({ location }) {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const data = await getFormattedWeatherData(city, units);
+      if (city != "") {
+        const data = await getFormattedWeatherData(city, units);
 
-      setWeather(data);
+        setWeather(data);
 
-      // dynamic background for units
-      const threshold = units === "metric" ? 20 : 60;
-      if (data.temp <= threshold) {
-        setActivity(false);
-        setBG(cold);
+        // dynamic background for units
+        const threshold = units === "metric" ? 20 : 60;
+        if (data.temp <= threshold) {
+          setActivity(false);
+          setBG(cold);
+        } else {
+          setBG(sunny);
+          setActivity(true);
+        }
       } else {
-        setBG(sunny);
-        setActivity(true);
+        handleCurrentLocation();
       }
     };
 
@@ -118,12 +123,14 @@ function WeatherDisplay({ location }) {
   }, [units, city]);
 
   const handleUnitsClick = (e) => {
+    console.log(city);
     const button = e.currentTarget;
     const currentUnit = button.innerText.slice(1);
 
     const isCelcius = currentUnit === "C";
     button.innerText = isCelcius ? "°F" : "°C";
     setUnits(isCelcius ? "metric" : "imperial");
+    console.log(city);
   };
 
   if (city != "") {
@@ -143,7 +150,8 @@ function WeatherDisplay({ location }) {
                   </div>
                   <div className="section section__temperature">
                     <div className="icon">
-                      <h3>{`${weather.name}, ${weather.country}`}</h3>
+                      <h3>Data Source: {`${weather.name}`}</h3>
+                      {/* <h3>{locationName}</h3> */}
                       <img src={weather.iconURL} alt="weatherIcon" />
                       <h3>{weather.description}</h3>
                     </div>
