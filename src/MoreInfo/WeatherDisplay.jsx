@@ -14,10 +14,11 @@ import { MdOutlineDirectionsRun } from "react-icons/md";
 import { FaRunning } from "react-icons/fa";
 
 function WeatherDisplay({ location }) {
+  // states defined which will be used accordingly as defined below
   const [city, setCity] = useState(location);
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
-  const [bg, setBG] = useState(sunny);
+  const [background, setBackground] = useState(sunny);
   const [activity, setActivity] = useState(false);
 
   // get the default browser location
@@ -25,29 +26,16 @@ function WeatherDisplay({ location }) {
     if (city == "") {
       try {
         //get browser data
-        console.log("City Name is empty");
-        // if (navigator.geolocation) {
-        //   console.log("City Name is not empty");
-        //   navigator.geolocation.getCurrentPosition(
-        //     (position) => {
-        //       let latitude = position.coords.latitude;
-        //       let longitude = position.coords.longitude;
 
-        //       setCity({ latitude, longitude });
-        //       console.log("changed");
-        //     },
-        //     (error) => {
-        //       console.log(error.message);
-        //     }
-        //   );
         if (navigator.geolocation) {
-          console.log("City Name is not empty");
           navigator.permissions
             .query({ name: "geolocation" })
             .then((permissionStatus) => {
               if (permissionStatus.state === "granted") {
+                // Permission is granted
                 navigator.geolocation.getCurrentPosition(
                   (position) => {
+                    // Set latitude and longitude coords accordingly
                     let latitude = position.coords.latitude;
                     let longitude = position.coords.longitude;
 
@@ -67,26 +55,23 @@ function WeatherDisplay({ location }) {
                 console.log(
                   "Geolocation permission has been denied by the user."
                 );
+                // Set latitude and longitude coords to default london coords
                 setCity({ latitude: "51.5072", longitude: "0.1276" });
               }
             });
         }
-
-        //   } else {
-        //     // default location is london
-        //     console.log("Default weather set to London");
-        //     setCity({ latitude: "51.5072", longitude: "0.1276" });
-        //   }
       } catch (error) {
         console.error(error);
       }
     }
   }
 
+  // useEffect will be called once and handleCurrentLocation() will be called
   useEffect(() => {
     handleCurrentLocation();
   }, []);
 
+  // array defining out-door activities which user can perform based on the weather
   const activities = [
     {
       id: 1,
@@ -110,6 +95,7 @@ function WeatherDisplay({ location }) {
     },
   ];
 
+  // array defining in-door activities which user can perform based on the weather
   const indoor_activities = [
     {
       id: 7,
@@ -133,23 +119,26 @@ function WeatherDisplay({ location }) {
     },
   ];
 
+  // use-effect will be called everytime the user changes the weather units or location name
   useEffect(() => {
     const fetchWeatherData = async () => {
       if (city != "") {
-        const data = await getFormattedWeatherData(city, units);
+        // data will be fetched from the API and assigned to the weather state
+        const weatherData = await getFormattedWeatherData(city, units);
+        setWeather(weatherData);
 
-        setWeather(data);
-
-        // dynamic background for units
+        // dynamic background for units based on the given temperature
         const threshold = units === "metric" ? 20 : 60;
-        if (data.temp <= threshold) {
+        // based on the weather threshold, the background screen will be set to either a warm or cold background cover
+        if (weatherData.temp <= threshold) {
           setActivity(false);
-          setBG(cold);
+          setBackground(cold);
         } else {
-          setBG(sunny);
+          setBackground(sunny);
           setActivity(true);
         }
       } else {
+        // if weather cannot be fetched, default weather will be displayed
         handleCurrentLocation();
       }
     };
@@ -157,13 +146,20 @@ function WeatherDisplay({ location }) {
     fetchWeatherData();
   }, [units, city]);
 
+  // function to define weather click change.
+  // weather will be displayed in celcius or Fahrenheight
   const handleUnitsClick = (e) => {
     console.log(city);
-    const button = e.currentTarget;
-    const currentUnit = button.innerText.slice(1);
+    // receive user button click
+    const userbutton = e.currentTarget;
+    // receive unit from button when clicked (either C or F)
+    const currentUnit = userbutton.innerText.slice(1);
 
+    // based on unit received, assign isCelcius variable to either true or false
     const isCelcius = currentUnit === "C";
-    button.innerText = isCelcius ? "°F" : "°C";
+    // based on whether isCelcius is true or false, assign the button the given unit value
+    userbutton.innerText = isCelcius ? "°F" : "°C";
+    // based on whether isCelcius is true or false, assign the unit to either metric or imperial
     setUnits(isCelcius ? "metric" : "imperial");
     console.log(city);
   };
@@ -171,38 +167,53 @@ function WeatherDisplay({ location }) {
   if (city != "") {
     return (
       <>
-        <div className="outside-app">
-          <div className="app" style={{ backgroundImage: `url(${bg})` }}>
-            <div className="overlay">
+        <div className="outside-app-style">
+          <div
+            className="app-style"
+            // display all info below based on assigned states above
+            // background image will be displayed
+            style={{ backgroundImage: `url(${background})` }}
+          >
+            <div className="overlay-style">
               {weather && (
                 <div className="container">
-                  <div className="section section__inputs">
+                  <div className="section section__inputs_button">
+                    {/* button to change between  Fahrenheight and Celcius */}
                     <h2>
                       Press the button to switch between Fahrenheight and
                       Celcius
                     </h2>
                     <button onClick={(e) => handleUnitsClick(e)}>°F</button>
                   </div>
-                  <div className="section section__temperature">
+                  <div className="section section__temperature_button">
                     <div className="icon">
+                      {/* displaying the weather obtained from the API stored in the data state */}
                       <h2>Data Source: {`${weather.name}`}</h2>
                       {/* <h3>{locationName}</h3> */}
+                      {/* displaying the given weather icon */}
                       <img src={weather.iconURL} alt="weatherIcon" />
-                      <h3>{weather.description}</h3>
+                      {/* displaying the given weather description */}
+                      <h3 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                        {weather.description}
+                      </h3>
                     </div>
                     <div className="temperature">
+                      {/* displaying the weather temperature based on units being metric or imperial */}
                       <h1>{`${weather.temp.toFixed()} °${
                         units === "metric" ? "C" : "F"
                       }`}</h1>
                       <h2>
+                        {/* formatting and displaying the date accordingly */}
                         {new Date(weather.dt * 1000).toLocaleTimeString()}
                       </h2>
                     </div>
                   </div>
-                  {/* bottom description */}
+                  {/* bottom description providing more info about the weather. rendered from a different component */}
                   <Descriptions weather={weather} units={units} />
+                  {/* Listing activities below for user to perform based on thwe weather */}
                   <div className="activity-title">ACTIVITIES TO DO</div>
                   <div className="section section__descriptions">
+                    {/* eithe outdoor activity will be displayed with name and icon or indoor activity will be displayed */}
                     {activity
                       ? activities.map(({ id, name, icon }) => (
                           <div key={id} className="card">

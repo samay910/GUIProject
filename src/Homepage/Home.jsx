@@ -20,33 +20,15 @@ function Home(props) {
     // props.coords is '' by default
     if (CurrentLocation == "") {
       try {
-        //get browser data
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(
-        //     (position) => {
-
-        //         let latitude= position.coords.latitude;
-        //         let longitude= position.coords.longitude;
-
-        //         setCurrentLocation({ latitude, longitude });
-
-        //     },
-        //     (error) => {
-        //         console.log(error.message);
-        //     })
-        // }
-        // else{
-        //     // default location is london
-        //     setCurrentLocation({ latitude:'51.5072', longitude:'0.1276' });
-        // }
         if (navigator.geolocation) {
-          console.log("City Name is not empty");
           navigator.permissions
             .query({ name: "geolocation" })
             .then((permissionStatus) => {
               if (permissionStatus.state === "granted") {
+                // Permission is granted
                 navigator.geolocation.getCurrentPosition(
                   (position) => {
+                    // Set latitude and longitude coords accordingly
                     let latitude = position.coords.latitude;
                     let longitude = position.coords.longitude;
 
@@ -60,6 +42,7 @@ function Home(props) {
               } else if (permissionStatus.state === "prompt") {
                 // Permission is not granted yet, but it can be requested
                 console.log("Geolocation permission is not granted yet.");
+                // Set latitude and longitude coords to default london coords
                 setCurrentLocation({
                   latitude: "51.5072",
                   longitude: "0.1276",
@@ -69,6 +52,7 @@ function Home(props) {
                 console.log(
                   "Geolocation permission has been denied by the user."
                 );
+                // Set latitude and longitude coords to default london coords
                 setCurrentLocation({
                   latitude: "51.5072",
                   longitude: "0.1276",

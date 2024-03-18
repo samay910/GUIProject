@@ -84,8 +84,7 @@ function Options() {
             <div className={styles.option_button_container}>
               {/* display the current location */}
               <h2>
-                Current Location:{" "}
-                {LocationName != "" ? LocationName : "Location Found"}
+                Current Location: {LocationName != "" ? LocationName : "London"}
               </h2>
 
               {/* when clicked switch to option screen */}
@@ -110,8 +109,7 @@ function Options() {
             <div className={styles.option_button_container}>
               {/* display the current location */}
               <h2>
-                Current Location:{" "}
-                {LocationName != "" ? LocationName : "Location Found"}
+                Current Location: {LocationName != "" ? LocationName : "London"}
               </h2>
 
               {/* when clicked returns to homepage */}
@@ -201,8 +199,7 @@ function Options() {
           <>
             <div className={styles.option_button_container}>
               <h2>
-                Current Location:{" "}
-                {LocationName != "" ? LocationName : "Browser Location"}
+                Current Location: {LocationName != "" ? LocationName : "London"}
               </h2>
 
               {/* when clicked switch to option screen */}

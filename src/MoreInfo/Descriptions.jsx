@@ -7,10 +7,12 @@ import { WiSunrise, WiSunset } from "react-icons/wi";
 import "./Descriptions.css";
 
 const Descriptions = ({ weather, units }) => {
+  // defining the different units for temperature and wind that our app will show
   const tempUnit = units === "metric" ? "°C" : "°F";
   const windUnit = units === "metric" ? "m/s" : "m/h";
 
-  const cards = [
+  // objects will be defined for the more-info features being displayed
+  const moreInfoCards = [
     {
       id: 1,
       icon: <FaArrowDown />,
@@ -71,7 +73,8 @@ const Descriptions = ({ weather, units }) => {
 
   return (
     <div className="section section__descriptions">
-      {cards.map(({ id, icon, title, data, unit }) => (
+      {/* displaying all the icons onto the screen with id, icon, title, data, unit of measurement */}
+      {moreInfoCards.map(({ id, icon, title, data, unit }) => (
         <div key={id} className="card">
           <div className="description__card-icon">
             {icon}
