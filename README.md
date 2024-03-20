@@ -1,8 +1,13 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# React + Vite Weather App Project.
 
-Currently, two official plugins are available:
+### To run our app, please run the following commands (if you have a mac, type 'sudo' in front of all these commands):
+```
+# - ** npm install **
+# - ** npm install axios **
+# - ** npm install react-icons **
+# - ** npm run dev **
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# This should start the weather app. A url will be provided. Copy the url into the web browser and the app should be running. The app will ask you to enable your locations. if you don't enable your locations, default weather of a town in London will be displayed otherwise the weather of your location will be displayed.
+
